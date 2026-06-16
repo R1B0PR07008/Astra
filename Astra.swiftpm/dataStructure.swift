@@ -74,16 +74,4 @@ struct Scholarship: Identifiable, Codable, Hashable {
 	let isMeritBased: Bool
 }
 
-// User Preferences
-struct UserPreferences: Codable {
-	var preferredLocations: [String]  // ["USA", "UK", "Canada"]
-	var maxTuition: Double?
-	var minAcceptanceRate: Double?
-	var maxAcceptanceRate: Double?
-	var preferredPrograms: [String]
-	var preferredTags: [String]
-	var campusSizePreference: String?  // "Small", "Medium", "Large"
-	var mustHaveScholarships: Bool
-}
-
 

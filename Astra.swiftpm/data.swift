@@ -268,301 +268,98 @@ let sampleUniversities: [University] = [
 		tags: ["Public Ivy", "Research", "Liberal", "Urban"]
 	),
 	
-	// 6. Cambridge University
+	// 6. Tecnológico de Costa Rica
 	University(
 		id: UUID(),
 		imageName: "6",
-		name: "University of Cambridge",
-		location: "Cambridge, England, UK",
-		subtitle: "Public • Historic",
-		description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-		websiteURL: "https://www.cam.ac.uk",
+		name: "Tecnológico de Costa Rica",
+		location: "Cartago, Costa Rica",
+		subtitle: "Public • Engineering Focus",
+		description: "El TEC es la principal institución de educación superior tecnológica de Costa Rica. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reconocido por su excelencia en ingeniería y ciencias aplicadas.",
+		websiteURL: "https://www.tec.ac.cr",
 		isSelected: false,
 		isFavorite: false,
-		minGPA: 3.92,
-		minSAT: 1480,
-		minACT: 33,
-		acceptanceRate: 0.21,
-		minRequirementText: "GPA 3.92+ • SAT 1480+ • ACT 33+",
+		minGPA: 3.50,
+		minSAT: 1150,
+		minACT: 24,
+		acceptanceRate: 0.45,
+		minRequirementText: "GPA 3.50+ • SAT 1150+ • ACT 24+",
 		tuitionPrices: [
-			TuitionPrice(amount: 9250, currency: "GBP", period: "per year", type: "UK Students", financialAidAvailable: true),
-			TuitionPrice(amount: 25734, currency: "GBP", period: "per year", type: "International", financialAidAvailable: true)
+			TuitionPrice(amount: 2500, currency: "USD", period: "per year", type: "Costa Rican Students", financialAidAvailable: true),
+			TuitionPrice(amount: 6000, currency: "USD", period: "per year", type: "International", financialAidAvailable: true)
 		],
-		overallRating: 4.9,
+		overallRating: 4.6,
 		reviews: [
 			UniversityReview(
 				id: UUID(),
 				stars: 5,
-				studentName: "Henry W.",
-				major: "Mathematics",
+				studentName: "Carlos M.",
+				major: "Computer Engineering",
 				graduationYear: 2023,
 				summary: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.",
-				pros: ["Academic rigor", "Supervision system", "Rich history"],
-				cons: ["Intense workload", "Formal traditions"],
+				pros: ["Excellent engineering", "Affordable", "Strong industry connections"],
+				cons: ["Limited international recognition", "Smaller campus"],
 				date: Date()
 			)
 		],
-		programs: ["Mathematics", "Natural Sciences", "Engineering", "Computer Science", "Medicine"],
+		programs: ["Engineering", "Computer Science", "Biotechnology", "Environmental Science", "Design"],
 		scholarshipsAvailable: [
 			Scholarship(
 				id: UUID(),
-				name: "Gates Cambridge Scholarship",
-				amount: 20000,
-				currency: "GBP",
-				requirements: "Outstanding academic achievement",
-				deadline: Calendar.current.date(byAdding: .month, value: 9, to: Date()),
-				isFullRide: true,
+				name: "Beca TEC",
+				amount: 2000,
+				currency: "USD",
+				requirements: "Academic excellence",
+				deadline: Calendar.current.date(byAdding: .month, value: 5, to: Date()),
+				isFullRide: false,
 				isMeritBased: true
 			)
 		],
-		studentPopulation: 23247,
-		campusSize: "Large",
-		tags: ["Historic", "Prestigious", "Research", "Traditional"]
+		studentPopulation: 10000,
+		campusSize: "Medium",
+		tags: ["Engineering", "Technology", "Affordable", "Research"]
 	),
-	
-	// 7. Yale University
+
+	// (7) 9. UNAM (Universidad Nacional Autónoma de México)
 	University(
 		id: UUID(),
-		imageName: "7",
-		name: "Yale University",
-		location: "New Haven, CT, USA",
-		subtitle: "Ivy League • Private",
-		description: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-		websiteURL: "https://www.yale.edu",
+		imageName: "9",
+		name: "Universidad Nacional Autónoma de México",
+		location: "Mexico City, Mexico",
+		subtitle: "Public • Research University",
+		description: "La UNAM es una de las universidades más prestigiosas de América Latina. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Reconocida mundialmente por su excelencia académica y contribuciones a la investigación científica.",
+		websiteURL: "https://www.unam.mx",
 		isSelected: false,
 		isFavorite: false,
-		minGPA: 3.94,
-		minSAT: 1515,
-		minACT: 34,
-		acceptanceRate: 0.047,
-		minRequirementText: "GPA 3.94+ • SAT 1515+ • ACT 34+",
+		minGPA: 3.60,
+		minSAT: 1200,
+		minACT: 26,
+		acceptanceRate: 0.08,
+		minRequirementText: "GPA 3.60+ • SAT 1200+ • ACT 26+",
 		tuitionPrices: [
-			TuitionPrice(amount: 62250, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
+			TuitionPrice(amount: 500, currency: "USD", period: "per year", type: "Mexican Students", financialAidAvailable: true),
+			TuitionPrice(amount: 8000, currency: "USD", period: "per year", type: "International", financialAidAvailable: true)
 		],
 		overallRating: 4.8,
 		reviews: [
 			UniversityReview(
 				id: UUID(),
 				stars: 5,
-				studentName: "Isabella C.",
-				major: "Political Science",
+				studentName: "María G.",
+				major: "Engineering",
 				graduationYear: 2024,
-				summary: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
-				pros: ["Strong humanities", "Residential colleges", "Beautiful campus"],
-				cons: ["High pressure", "Expensive area"],
-				date: Date()
-			)
-		],
-		programs: ["Law", "Political Science", "History", "Drama", "Medicine"],
-		scholarshipsAvailable: [
-			Scholarship(
-				id: UUID(),
-				name: "Yale Scholarship",
-				amount: 60000,
-				currency: "USD",
-				requirements: "Need-based, no merit component",
-				deadline: Calendar.current.date(byAdding: .month, value: 6, to: Date()),
-				isFullRide: false,
-				isMeritBased: false
-			)
-		],
-		studentPopulation: 14776,
-		campusSize: "Medium",
-		tags: ["Ivy League", "Liberal Arts", "Historic", "Prestigious"]
-	),
-	
-	// 8. Princeton University
-	University(
-		id: UUID(),
-		imageName: "8",
-		name: "Princeton University",
-		location: "Princeton, NJ, USA",
-		subtitle: "Ivy League • Private",
-		description: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.",
-		websiteURL: "https://www.princeton.edu",
-		isSelected: false,
-		isFavorite: false,
-		minGPA: 3.95,
-		minSAT: 1510,
-		minACT: 34,
-		acceptanceRate: 0.042,
-		minRequirementText: "GPA 3.95+ • SAT 1510+ • ACT 34+",
-		tuitionPrices: [
-			TuitionPrice(amount: 57410, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
-		],
-		overallRating: 4.9,
-		reviews: [
-			UniversityReview(
-				id: UUID(),
-				stars: 5,
-				studentName: "Michael P.",
-				major: "Economics",
-				graduationYear: 2023,
-				summary: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.",
-				pros: ["Undergraduate focus", "Strong financial aid", "Small classes"],
-				cons: ["Suburban location", "Limited graduate programs"],
-				date: Date()
-			)
-		],
-		programs: ["Economics", "Mathematics", "Physics", "Politics", "Engineering"],
-		scholarshipsAvailable: [
-			Scholarship(
-				id: UUID(),
-				name: "Princeton Grant",
-				amount: 55000,
-				currency: "USD",
-				requirements: "Need-based financial aid",
-				deadline: Calendar.current.date(byAdding: .month, value: 5, to: Date()),
-				isFullRide: false,
-				isMeritBased: false
-			)
-		],
-		studentPopulation: 8842,
-		campusSize: "Medium",
-		tags: ["Ivy League", "Undergraduate Focus", "Elite", "Research"]
-	),
-	
-	// 9. Columbia University
-	University(
-		id: UUID(),
-		imageName: "9",
-		name: "Columbia University",
-		location: "New York, NY, USA",
-		subtitle: "Ivy League • Private",
-		description: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
-		websiteURL: "https://www.columbia.edu",
-		isSelected: false,
-		isFavorite: false,
-		minGPA: 3.93,
-		minSAT: 1505,
-		minACT: 34,
-		acceptanceRate: 0.038,
-		minRequirementText: "GPA 3.93+ • SAT 1505+ • ACT 34+",
-		tuitionPrices: [
-			TuitionPrice(amount: 65524, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
-		],
-		overallRating: 4.7,
-		reviews: [
-			UniversityReview(
-				id: UUID(),
-				stars: 4,
-				studentName: "Sophia N.",
-				major: "Journalism",
-				graduationYear: 2024,
-				summary: "Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur.",
-				pros: ["NYC location", "Core curriculum", "Media connections"],
-				cons: ["Very expensive city", "Stressful environment"],
-				date: Date()
-			)
-		],
-		programs: ["Journalism", "Business", "Engineering", "International Relations", "Film"],
-		scholarshipsAvailable: [
-			Scholarship(
-				id: UUID(),
-				name: "C. P. Davis Scholarship",
-				amount: 40000,
-				currency: "USD",
-				requirements: "Academic merit and need",
-				deadline: Calendar.current.date(byAdding: .month, value: 7, to: Date()),
-				isFullRide: false,
-				isMeritBased: true
-			)
-		],
-		studentPopulation: 33413,
-		campusSize: "Large",
-		tags: ["Ivy League", "Urban", "Diverse", "Media"]
-	),
-	
-	// 10. Caltech
-	University(
-		id: UUID(),
-		imageName: "10",
-		name: "California Institute of Technology",
-		location: "Pasadena, CA, USA",
-		subtitle: "Private • STEM Elite",
-		description: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
-		websiteURL: "https://www.caltech.edu",
-		isSelected: false,
-		isFavorite: false,
-		minGPA: 3.98,
-		minSAT: 1545,
-		minACT: 35,
-		acceptanceRate: 0.034,
-		minRequirementText: "GPA 3.98+ • SAT 1545+ • ACT 35+",
-		tuitionPrices: [
-			TuitionPrice(amount: 60864, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
-		],
-		overallRating: 4.9,
-		reviews: [
-			UniversityReview(
-				id: UUID(),
-				stars: 5,
-				studentName: "David L.",
-				major: "Physics",
-				graduationYear: 2023,
 				summary: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.",
-				pros: ["Small student body", "Top STEM programs", "Research opportunities"],
-				cons: ["Very intense", "Limited social scene"],
+				pros: ["Prestigious reputation", "Very affordable", "Strong research"],
+				cons: ["Large class sizes", "Competitive entry"],
 				date: Date()
 			)
 		],
-		programs: ["Physics", "Engineering", "Chemistry", "Computer Science", "Astronomy"],
+		programs: ["Engineering", "Medicine", "Law", "Architecture", "Biology"],
 		scholarshipsAvailable: [
 			Scholarship(
 				id: UUID(),
-				name: "Caltech Merit Scholarship",
-				amount: 50000,
-				currency: "USD",
-				requirements: "Exceptional STEM achievement",
-				deadline: Calendar.current.date(byAdding: .month, value: 8, to: Date()),
-				isFullRide: false,
-				isMeritBased: true
-			)
-		],
-		studentPopulation: 2397,
-		campusSize: "Small",
-		tags: ["STEM", "Elite", "Research", "Small"]
-	),
-	
-	// 11. University of Chicago
-	University(
-		id: UUID(),
-		imageName: "11",
-		name: "University of Chicago",
-		location: "Chicago, IL, USA",
-		subtitle: "Private • Research University",
-		description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae.",
-		websiteURL: "https://www.uchicago.edu",
-		isSelected: false,
-		isFavorite: false,
-		minGPA: 3.92,
-		minSAT: 1520,
-		minACT: 34,
-		acceptanceRate: 0.056,
-		minRequirementText: "GPA 3.92+ • SAT 1520+ • ACT 34+",
-		tuitionPrices: [
-			TuitionPrice(amount: 62940, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
-		],
-		overallRating: 4.7,
-		reviews: [
-			UniversityReview(
-				id: UUID(),
-				stars: 5,
-				studentName: "Rachel B.",
-				major: "Economics",
-				graduationYear: 2024,
-				summary: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.",
-				pros: ["Intellectual culture", "Strong economics", "Core curriculum"],
-				cons: ["Where fun goes to die", "Harsh winters"],
-				date: Date()
-			)
-		],
-		programs: ["Economics", "Law", "Business", "Political Science", "Sociology"],
-		scholarshipsAvailable: [
-			Scholarship(
-				id: UUID(),
-				name: "University Scholarship",
-				amount: 35000,
+				name: "Beca UNAM",
+				amount: 3000,
 				currency: "USD",
 				requirements: "Academic excellence",
 				deadline: Calendar.current.date(byAdding: .month, value: 6, to: Date()),
@@ -570,165 +367,208 @@ let sampleUniversities: [University] = [
 				isMeritBased: true
 			)
 		],
-		studentPopulation: 18452,
-		campusSize: "Medium",
-		tags: ["Intellectual", "Economics", "Research", "Urban"]
+		studentPopulation: 356000,
+		campusSize: "Very Large",
+		tags: ["Public", "Research", "Historic", "Affordable"]
 	),
-	
-	// 12. Duke University
+
+	// (8) 10. Tecnológico de Monterrey
 	University(
 		id: UUID(),
-		imageName: "12",
-		name: "Duke University",
-		location: "Durham, NC, USA",
-		subtitle: "Private • Research University",
-		description: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-		websiteURL: "https://www.duke.edu",
+		imageName: "10",
+		name: "Instituto Tecnológico y de Estudios Superiores de Monterrey",
+		location: "Monterrey, Nuevo León, Mexico",
+		subtitle: "Private • Technology Focus",
+		description: "El Tec de Monterrey es una institución líder en innovación y emprendimiento. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ofrece programas de clase mundial con enfoque empresarial y tecnológico.",
+		websiteURL: "https://www.tec.mx",
 		isSelected: false,
 		isFavorite: false,
-		minGPA: 3.94,
-		minSAT: 1510,
-		minACT: 34,
-		acceptanceRate: 0.058,
-		minRequirementText: "GPA 3.94+ • SAT 1510+ • ACT 34+",
+		minGPA: 3.70,
+		minSAT: 1300,
+		minACT: 28,
+		acceptanceRate: 0.36,
+		minRequirementText: "GPA 3.70+ • SAT 1300+ • ACT 28+",
 		tuitionPrices: [
-			TuitionPrice(amount: 63054, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
+			TuitionPrice(amount: 15000, currency: "USD", period: "per year", type: "Mexican Students", financialAidAvailable: true),
+			TuitionPrice(amount: 18000, currency: "USD", period: "per year", type: "International", financialAidAvailable: true)
 		],
-		overallRating: 4.8,
+		overallRating: 4.7,
 		reviews: [
 			UniversityReview(
 				id: UUID(),
 				stars: 5,
-				studentName: "Andrew T.",
-				major: "Biomedical Engineering",
-				graduationYear: 2023,
-				summary: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid.",
-				pros: ["Strong athletics", "Beautiful campus", "Great medical programs"],
-				cons: ["Southern location", "Greek life dominant"],
+				studentName: "Roberto S.",
+				major: "Business Administration",
+				graduationYear: 2024,
+				summary: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.",
+				pros: ["Innovation focus", "Strong business programs", "Entrepreneurship culture"],
+				cons: ["Higher tuition", "Competitive environment"],
 				date: Date()
 			)
 		],
-		programs: ["Biomedical Engineering", "Business", "Public Policy", "Medicine", "Law"],
+		programs: ["Engineering", "Business", "Computer Science", "Innovation", "Entrepreneurship"],
 		scholarshipsAvailable: [
 			Scholarship(
 				id: UUID(),
-				name: "Robertson Scholars Leadership Program",
-				amount: 70000,
+				name: "Beca Excelencia",
+				amount: 10000,
 				currency: "USD",
-				requirements: "Leadership and academic excellence",
-				deadline: Calendar.current.date(byAdding: .month, value: 9, to: Date()),
-				isFullRide: true,
+				requirements: "Academic excellence, SAT 1400+",
+				deadline: Calendar.current.date(byAdding: .month, value: 7, to: Date()),
+				isFullRide: false,
 				isMeritBased: true
 			)
 		],
-		studentPopulation: 17620,
-		campusSize: "Large",
-		tags: ["Sports", "Research", "Medical", "Beautiful Campus"]
+		studentPopulation: 94000,
+		campusSize: "Very Large",
+		tags: ["Innovation", "Business", "Tech", "Entrepreneurship"]
 	),
-	
-	// 13. Northwestern University
+
+	// (9) 11. Universidad de Buenos Aires
+	University(
+		id: UUID(),
+		imageName: "11",
+		name: "Universidad de Buenos Aires",
+		location: "Buenos Aires, Argentina",
+		subtitle: "Public • Research University",
+		description: "La UBA es una de las universidades más prestigiosas de América Latina. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. Educación pública gratuita de alta calidad.",
+		websiteURL: "https://www.uba.ar",
+		isSelected: false,
+		isFavorite: false,
+		minGPA: 3.40,
+		minSAT: 1100,
+		minACT: 23,
+		acceptanceRate: 0.28,
+		minRequirementText: "GPA 3.40+ • SAT 1100+ • ACT 23+",
+		tuitionPrices: [
+			TuitionPrice(amount: 0, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: false)
+		],
+		overallRating: 4.7,
+		reviews: [
+			UniversityReview(
+				id: UUID(),
+				stars: 5,
+				studentName: "Sofía L.",
+				major: "Medicine",
+				graduationYear: 2023,
+				summary: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+				pros: ["Free tuition", "Strong academics", "Historic prestige"],
+				cons: ["Very large", "Bureaucratic"],
+				date: Date()
+			)
+		],
+		programs: ["Medicine", "Law", "Economics", "Psychology", "Engineering"],
+		scholarshipsAvailable: [],
+		studentPopulation: 308000,
+		campusSize: "Very Large",
+		tags: ["Public", "Free Tuition", "Research", "Historic"]
+	),
+
+	// (10) 13. Pontificia Universidad Católica de Chile
 	University(
 		id: UUID(),
 		imageName: "13",
-		name: "Northwestern University",
-		location: "Evanston, IL, USA",
+		name: "Pontificia Universidad Católica de Chile",
+		location: "Santiago, Chile",
 		subtitle: "Private • Research University",
-		description: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.",
-		websiteURL: "https://www.northwestern.edu",
+		description: "La UC es la universidad líder de Chile y una de las más prestigiosas de América Latina. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet. Excelencia académica reconocida internacionalmente.",
+		websiteURL: "https://www.uc.cl",
 		isSelected: false,
 		isFavorite: false,
-		minGPA: 3.92,
-		minSAT: 1490,
-		minACT: 33,
-		acceptanceRate: 0.070,
-		minRequirementText: "GPA 3.92+ • SAT 1490+ • ACT 33+",
+		minGPA: 3.65,
+		minSAT: 1250,
+		minACT: 27,
+		acceptanceRate: 0.20,
+		minRequirementText: "GPA 3.65+ • SAT 1250+ • ACT 27+",
 		tuitionPrices: [
-			TuitionPrice(amount: 63468, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
+			TuitionPrice(amount: 8500, currency: "USD", period: "per year", type: "Chilean Students", financialAidAvailable: true),
+			TuitionPrice(amount: 12000, currency: "USD", period: "per year", type: "International", financialAidAvailable: true)
+		],
+		overallRating: 4.7,
+		reviews: [
+			UniversityReview(
+				id: UUID(),
+				stars: 5,
+				studentName: "Diego P.",
+				major: "Engineering",
+				graduationYear: 2024,
+				summary: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+				pros: ["Top in Chile", "Strong research", "International connections"],
+				cons: ["Expensive for region", "Conservative culture"],
+				date: Date()
+			)
+		],
+		programs: ["Engineering", "Medicine", "Business", "Law", "Architecture"],
+		scholarshipsAvailable: [
+			Scholarship(
+				id: UUID(),
+				name: "Beca Excelencia Académica",
+				amount: 5000,
+				currency: "USD",
+				requirements: "Top academic performance",
+				deadline: Calendar.current.date(byAdding: .month, value: 6, to: Date()),
+				isFullRide: false,
+				isMeritBased: true
+			)
+		],
+		studentPopulation: 30000,
+		campusSize: "Large",
+		tags: ["Catholic", "Research", "Prestigious", "Urban"]
+	),
+
+	// (11) 14. Universidad de los Andes
+	University(
+		id: UUID(),
+		imageName: "14",
+		name: "Universidad de los Andes",
+		location: "Bogotá, Colombia",
+		subtitle: "Private • Liberal Arts",
+		description: "Los Andes es la universidad privada más prestigiosa de Colombia. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse. Enfoque en formación integral y pensamiento crítico.",
+		websiteURL: "https://www.uniandes.edu.co",
+		isSelected: false,
+		isFavorite: false,
+		minGPA: 3.60,
+		minSAT: 1220,
+		minACT: 26,
+		acceptanceRate: 0.30,
+		minRequirementText: "GPA 3.60+ • SAT 1220+ • ACT 26+",
+		tuitionPrices: [
+			TuitionPrice(amount: 9000, currency: "USD", period: "per year", type: "Colombian Students", financialAidAvailable: true),
+			TuitionPrice(amount: 13000, currency: "USD", period: "per year", type: "International", financialAidAvailable: true)
 		],
 		overallRating: 4.6,
 		reviews: [
 			UniversityReview(
 				id: UUID(),
 				stars: 4,
-				studentName: "Jennifer S.",
-				major: "Journalism",
-				graduationYear: 2024,
-				summary: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.",
-				pros: ["Strong journalism", "Chicago access", "Great co-op programs"],
-				cons: ["Cold winters", "Expensive"],
+				studentName: "Camila R.",
+				major: "Political Science",
+				graduationYear: 2023,
+				summary: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.",
+				pros: ["Liberal arts focus", "Urban location", "International exchange programs"],
+				cons: ["Expensive for Colombia", "Bogotá traffic"],
 				date: Date()
 			)
 		],
-		programs: ["Journalism", "Engineering", "Business", "Theater", "Communications"],
+		programs: ["Engineering", "Business", "Law", "Political Science", "Economics"],
 		scholarshipsAvailable: [
 			Scholarship(
 				id: UUID(),
-				name: "Northwestern Scholarship",
-				amount: 30000,
+				name: "Beca Equidad",
+				amount: 7000,
 				currency: "USD",
 				requirements: "Need and merit based",
 				deadline: Calendar.current.date(byAdding: .month, value: 5, to: Date()),
 				isFullRide: false,
-				isMeritBased: true
-			)
-		],
-		studentPopulation: 22603,
-		campusSize: "Large",
-		tags: ["Journalism", "Big Ten", "Urban", "Research"]
-	),
-	
-	// 14. Cornell University
-	University(
-		id: UUID(),
-		imageName: "14",
-		name: "Cornell University",
-		location: "Ithaca, NY, USA",
-		subtitle: "Ivy League • Private",
-		description: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.",
-		websiteURL: "https://www.cornell.edu",
-		isSelected: false,
-		isFavorite: false,
-		minGPA: 3.90,
-		minSAT: 1480,
-		minACT: 33,
-		acceptanceRate: 0.087,
-		minRequirementText: "GPA 3.90+ • SAT 1480+ • ACT 33+",
-		tuitionPrices: [
-			TuitionPrice(amount: 63200, currency: "USD", period: "per year", type: "All Students", financialAidAvailable: true)
-		],
-		overallRating: 4.6,
-		reviews: [
-			UniversityReview(
-				id: UUID(),
-				stars: 4,
-				studentName: "Kevin M.",
-				major: "Hotel Administration",
-				graduationYear: 2023,
-				summary: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.",
-				pros: ["Diverse programs", "Beautiful gorges", "Strong alumni network"],
-				cons: ["Isolated location", "Cold climate", "Competitive"],
-				date: Date()
-			)
-		],
-		programs: ["Engineering", "Hotel Administration", "Agriculture", "Architecture", "Veterinary"],
-		scholarshipsAvailable: [
-			Scholarship(
-				id: UUID(),
-				name: "Cornell Tradition Fellowship",
-				amount: 25000,
-				currency: "USD",
-				requirements: "Work-study commitment",
-				deadline: Calendar.current.date(byAdding: .month, value: 4, to: Date()),
-				isFullRide: false,
 				isMeritBased: false
 			)
 		],
-		studentPopulation: 25898,
-		campusSize: "Large",
-		tags: ["Ivy League", "Diverse Programs", "Rural", "Beautiful"]
+		studentPopulation: 19000,
+		campusSize: "Medium",
+		tags: ["Liberal Arts", "Urban", "Research", "International"]
 	),
 	
-	// 15. University of Pennsylvania
+	// (12) 15. University of Pennsylvania
 	University(
 		id: UUID(),
 		imageName: "15",
@@ -779,7 +619,7 @@ let sampleUniversities: [University] = [
 		tags: ["Ivy League", "Business", "Urban", "Pre-professional"]
 	),
 	
-	// 16. Johns Hopkins University
+	// (13) 16. Johns Hopkins University
 	University(
 		id: UUID(),
 		imageName: "16",
@@ -830,88 +670,3 @@ let sampleUniversities: [University] = [
 		tags: ["Medical", "Research", "STEM", "Pre-med"]
 	)
 ]
-
-// MARK: - Helper Functions
-
-extension Array where Element == University {
-	func filtered(by preferences: UserPreferences) -> [University] {
-		return self.filter { university in
-			// Filter by max tuition
-			if let maxTuition = preferences.maxTuition {
-				let minPrice = university.tuitionPrices.map { $0.amount }.min() ?? 0
-				if minPrice > maxTuition {
-					return false
-				}
-			}
-			
-			// Filter by programs
-			if !preferences.preferredPrograms.isEmpty {
-				let hasProgram = university.programs.contains { program in
-					preferences.preferredPrograms.contains(program)
-				}
-				if !hasProgram {
-					return false
-				}
-			}
-			
-			// Filter by tags
-			if !preferences.preferredTags.isEmpty {
-				let hasTag = university.tags.contains { tag in
-					preferences.preferredTags.contains(tag)
-				}
-				if !hasTag {
-					return false
-				}
-			}
-			
-			return true
-		}
-	}
-	
-	func sortedByMatch(preferences: UserPreferences) -> [University] {
-		return self.sorted { uni1, uni2 in
-			let score1 = calculateMatchScore(university: uni1, preferences: preferences)
-			let score2 = calculateMatchScore(university: uni2, preferences: preferences)
-			return score1 > score2
-		}
-	}
-	
-	private func calculateMatchScore(university: University, preferences: UserPreferences) -> Int {
-		var score = 0
-		
-		// Score based on program matches
-		for program in university.programs {
-			if preferences.preferredPrograms.contains(program) {
-				score += 10
-			}
-		}
-		
-		// Score based on tag matches
-		for tag in university.tags {
-			if preferences.preferredTags.contains(tag) {
-				score += 5
-			}
-		}
-		
-		// Score based on scholarships
-		if preferences.mustHaveScholarships && !university.scholarshipsAvailable.isEmpty {
-			score += 15
-		}
-		
-		return score
-	}
-}
-
-// MARK: - User Preferences
-
-// Sample user preferences
-let sampleUserPreferences = UserPreferences(
-	preferredLocations: ["USA", "UK"],
-	maxTuition: 50000,
-	minAcceptanceRate: nil,
-	maxAcceptanceRate: 0.10,
-	preferredPrograms: ["Computer Science", "Engineering"],
-	preferredTags: ["STEM", "Research", "Innovation"],
-	campusSizePreference: "Large",
-	mustHaveScholarships: true
-)

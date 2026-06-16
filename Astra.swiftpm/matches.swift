@@ -2,8 +2,6 @@
 //  matches.swift
 //  Astra
 //
-//  Created by Riboldi  on 15/02/26.
-//
 
 import SwiftUI
 
@@ -12,9 +10,13 @@ struct MatchesView: View {
 	
 	@Environment(\.colorScheme) var colorScheme
 	@Binding var universities: [University]
+	@ObservedObject var profileManager: ProfileManager  // ADD THIS
 	
 	@State private var selectedFilter: FilterType = .all
 	@State private var showingDetail: University? = nil
+	
+	// ADD THIS - recommendation engine for sorting
+	private let recommendationEngine = UniversityRecommendationEngine()
 	
 	enum FilterType: String, CaseIterable {
 		case all = "All"
@@ -22,6 +24,27 @@ struct MatchesView: View {
 		case added = "Added"
 	}
 	
+	// Sorted by match score, highest first
+	var rankedFilteredUniversities: [University] {
+		let ranked = recommendationEngine.rankUniversities(universities, profile: profileManager.profile)
+		
+		switch selectedFilter {
+		case .all:
+			return ranked
+				.filter { $0.university.isFavorite || $0.university.isSelected }
+				.map { $0.university }
+		case .favorites:
+			return ranked
+				.filter { $0.university.isFavorite }
+				.map { $0.university }
+		case .added:
+			return ranked
+				.filter { $0.university.isSelected }
+				.map { $0.university }
+		}
+	}
+	
+	// Keep this for empty state and filter counts
 	var filteredUniversities: [University] {
 		switch selectedFilter {
 		case .all:
@@ -93,6 +116,21 @@ struct MatchesView: View {
 				}
 				
 				Spacer()
+				
+				// Sort indicator badge
+				HStack(spacing: 4) {
+					Image(systemName: "arrow.down.circle.fill")
+						.font(.system(size: 12))
+					Text("Best Match")
+						.font(.system(size: 12, weight: .semibold))
+				}
+				.foregroundColor(Color.Accent)
+				.padding(.horizontal, 10)
+				.padding(.vertical, 5)
+				.background(
+					Capsule()
+						.fill(Color.Accent.opacity(0.12))
+				)
 			}
 			.padding(.horizontal, 24)
 			.padding(.top, 20)
@@ -134,15 +172,22 @@ struct MatchesView: View {
 		}
 	}
 	
-	// MARK: - Matches List
+	// MARK: - Matches List (now uses rankedFilteredUniversities)
 	
 	private var matchesListView: some View {
 		ScrollView {
 			LazyVStack(spacing: 16) {
-				ForEach(filteredUniversities) { university in
+				ForEach(rankedFilteredUniversities) { university in
 					if let index = universities.firstIndex(where: { $0.id == university.id }) {
+						
+						// Get this university's match score for display
+						let matchScore = recommendationEngine
+							.rankUniversities([university], profile: profileManager.profile)
+							.first?.overallScore ?? 0
+						
 						UniversityMatchCard(
 							university: university,
+							matchScore: matchScore,  // Pass score to card
 							onFavorite: {
 								withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
 									universities[index].isFavorite.toggle()
@@ -238,58 +283,11 @@ struct MatchesView: View {
 	}
 }
 
-// MARK: - Filter Chip Component
-
-struct FilterChip: View {
-	let title: String
-	let count: Int
-	let isSelected: Bool
-	let action: () -> Void
-	
-	var body: some View {
-		Button(action: action) {
-			HStack(spacing: 6) {
-				Text(title)
-					.font(.system(size: 15, weight: .semibold))
-				
-				Text("\(count)")
-					.font(.system(size: 13, weight: .bold))
-					.foregroundColor(isSelected ? .white.opacity(0.9) : Color.Accent)
-					.padding(.horizontal, 8)
-					.padding(.vertical, 2)
-					.background(
-						Capsule()
-							.fill(isSelected ? Color.white.opacity(0.2) : Color.Accent.opacity(0.15))
-					)
-			}
-			.foregroundColor(isSelected ? .white : .primary)
-			.padding(.horizontal, 16)
-			.padding(.vertical, 10)
-			.background(
-				Capsule()
-					.fill(isSelected ?
-						LinearGradient(
-							colors: [Color.Accent, Color.Primary],
-							startPoint: .leading,
-							endPoint: .trailing
-						) :
-						LinearGradient(
-							colors: [Color.gray.opacity(0.1), Color.gray.opacity(0.1)],
-							startPoint: .leading,
-							endPoint: .trailing
-						)
-					)
-			)
-			.shadow(color: isSelected ? Color.Accent.opacity(0.3) : Color.clear, radius: 8, x: 0, y: 4)
-		}
-		.buttonStyle(ScaleButtonStyle())
-	}
-}
-
-// MARK: - University Match Card
+// MARK: - University Match Card (updated with matchScore)
 
 struct UniversityMatchCard: View {
 	let university: University
+	let matchScore: Double          // ADD THIS
 	let onFavorite: () -> Void
 	let onAdd: () -> Void
 	let onTap: () -> Void
@@ -364,7 +362,26 @@ struct UniversityMatchCard: View {
 						}
 					}
 					
-					Spacer()
+					// Match score badge  ← NEW
+					HStack(spacing: 4) {
+						Image(systemName: "sparkles")
+							.font(.system(size: 10))
+						Text("\(Int(matchScore * 100))% Match")
+							.font(.system(size: 12, weight: .bold))
+					}
+					.foregroundColor(.white)
+					.padding(.horizontal, 10)
+					.padding(.vertical, 4)
+					.background(
+						Capsule()
+							.fill(
+								LinearGradient(
+									colors: [Color.Accent, Color.Primary],
+									startPoint: .leading,
+									endPoint: .trailing
+								)
+							)
+					)
 				}
 				.frame(maxWidth: .infinity, alignment: .leading)
 				
@@ -404,7 +421,7 @@ struct UniversityMatchCard: View {
 	}
 }
 
-// MARK: - University Detail View (Placeholder)
+// MARK: - Rest of file unchanged below this point
 
 struct UniversityDetailView: View {
 	let university: University
@@ -419,12 +436,11 @@ struct UniversityDetailView: View {
 						Image(uiImage: uiImage)
 							.resizable()
 							.scaledToFill()
-							.frame(height: 300)
+							.frame(width: UIScreen.main.bounds.width,height: 300)
 							.clipped()
 					}
 					
 					VStack(alignment: .leading, spacing: 16) {
-						// Name and location
 						VStack(alignment: .leading, spacing: 8) {
 							Text(university.name)
 								.font(.system(size: 32, weight: .bold, design: .rounded))
@@ -437,7 +453,6 @@ struct UniversityDetailView: View {
 							.foregroundColor(.secondary)
 						}
 						
-						// Stats
 						HStack(spacing: 16) {
 							StatPill(icon: "star.fill", value: String(format: "%.1f", university.overallRating), label: "Rating", color: .yellow)
 							
@@ -450,7 +465,6 @@ struct UniversityDetailView: View {
 							}
 						}
 						
-						// Description
 						VStack(alignment: .leading, spacing: 8) {
 							Text("About")
 								.font(.system(size: 20, weight: .bold))
@@ -460,7 +474,24 @@ struct UniversityDetailView: View {
 								.foregroundColor(.secondary)
 						}
 						
-						// Programs
+						// Website
+						VStack(alignment: .leading, spacing: 8) {
+							Text("University Website")
+								.font(.system(size: 18, weight: .bold))
+								.foregroundColor(.primary)
+							
+							Link(university.websiteURL, destination: URL(string: university.websiteURL.hasPrefix("http") ? university.websiteURL : "https://\(university.websiteURL)")!)
+								.font(.system(size: 15, weight: .medium))
+								.foregroundColor(Color.Accent)
+						}
+						
+						if !university.scholarshipsAvailable.isEmpty {
+							Text("Scholarships")
+								.font(.system(size: 20, weight: .bold))
+							
+							MoreInfo(university: university)
+						}
+						
 						if !university.programs.isEmpty {
 							VStack(alignment: .leading, spacing: 12) {
 								Text("Programs")
@@ -472,17 +503,13 @@ struct UniversityDetailView: View {
 											.font(.system(size: 14, weight: .medium))
 											.padding(.horizontal, 12)
 											.padding(.vertical, 6)
-											.background(
-												Capsule()
-													.fill(Color.Accent.opacity(0.15))
-											)
+											.background(Capsule().fill(Color.Accent.opacity(0.15)))
 											.foregroundColor(Color.Accent)
 									}
 								}
 							}
 						}
 						
-						// Requirements
 						VStack(alignment: .leading, spacing: 8) {
 							Text("Requirements")
 								.font(.system(size: 20, weight: .bold))
@@ -499,12 +526,51 @@ struct UniversityDetailView: View {
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
-					Button("Done") {
-						dismiss()
-					}
+					Button("Close") { dismiss() }
 				}
 			}
 		}
+	}
+	
+	private func MoreInfo(university: University) -> some View {
+		return AnyView(
+			VStack(alignment: .leading, spacing: 8) {
+				ForEach(Array(university.scholarshipsAvailable.enumerated()), id: \.element.id) { index, scholarship in
+					VStack(alignment: .leading, spacing: 4) {
+						Text("\(index + 1)) \(scholarship.name)")
+							.font(.system(size: 20, weight: .bold))
+						
+						if let deadline = scholarship.deadline {
+							Text("Deadline: \(formatDate(deadline))")
+								.font(.system(size: 14, weight: .medium))
+								.foregroundColor(.secondary)
+						}
+						
+						Text("- Scholarship Amount: \(formatCurrency(scholarship.amount))")
+							.font(.system(size: 14, weight: .medium))
+							.foregroundColor(.secondary)
+						
+						Text("- Requirements: \(scholarship.requirements)")
+							.font(.system(size: 14, weight: .medium))
+							.foregroundColor(.secondary)
+					}
+				}
+			}
+			.padding(.horizontal, 24)
+		)
+	}
+	
+	private func formatDate(_ date: Date) -> String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "MM/dd/yyyy"
+		return formatter.string(from: date)
+	}
+	
+	private func formatCurrency(_ amount: Double) -> String {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
+		formatter.maximumFractionDigits = 0
+		return formatter.string(from: NSNumber(value: amount)) ?? "\(Int(amount))"
 	}
 }
 
@@ -532,14 +598,51 @@ struct StatPill: View {
 		}
 		.frame(maxWidth: .infinity)
 		.padding(.vertical, 12)
-		.background(
-			RoundedRectangle(cornerRadius: 12)
-				.fill(.ultraThinMaterial)
-		)
+		.background(RoundedRectangle(cornerRadius: 12).fill(.ultraThinMaterial))
 	}
 }
 
-// MARK: - Flow Layout (for program tags)
+// MARK: - Filter Chip Component
+
+struct FilterChip: View {
+	let title: String
+	let count: Int
+	let isSelected: Bool
+	let action: () -> Void
+	
+	var body: some View {
+		Button(action: action) {
+			HStack(spacing: 6) {
+				Text(title)
+					.font(.system(size: 15, weight: .semibold))
+				
+				Text("\(count)")
+					.font(.system(size: 13, weight: .bold))
+					.foregroundColor(isSelected ? .white.opacity(0.9) : Color.Accent)
+					.padding(.horizontal, 8)
+					.padding(.vertical, 2)
+					.background(
+						Capsule()
+							.fill(isSelected ? Color.white.opacity(0.2) : Color.Accent.opacity(0.15))
+					)
+			}
+			.foregroundColor(isSelected ? .white : .primary)
+			.padding(.horizontal, 16)
+			.padding(.vertical, 10)
+			.background(
+				Capsule()
+					.fill(isSelected ?
+						  LinearGradient(colors: [Color.Accent, Color.Primary], startPoint: .leading, endPoint: .trailing) :
+							LinearGradient(colors: [Color.gray.opacity(0.1), Color.gray.opacity(0.1)], startPoint: .leading, endPoint: .trailing)
+					)
+			)
+			.shadow(color: isSelected ? Color.Accent.opacity(0.3) : Color.clear, radius: 8, x: 0, y: 4)
+		}
+		.buttonStyle(ScaleButtonStyle())
+	}
+}
+
+// MARK: - Flow Layout
 
 struct FlowLayout: Layout {
 	var spacing: CGFloat = 8
@@ -584,19 +687,9 @@ struct FlowLayout: Layout {
 	}
 }
 
-// MARK: - Button Style
-
-//struct ScaleButtonStyle: ButtonStyle {
-//	func makeBody(configuration: Configuration) -> some View {
-//		configuration.label
-//			.scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-//			.animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
-//	}
-//}
-
 // MARK: - Preview
 
 @available(iOS 26.0, *)
 #Preview {
-	MatchesView(universities: .constant(sampleUniversities))
+	MatchesView(universities: .constant(sampleUniversities), profileManager: ProfileManager())
 }
